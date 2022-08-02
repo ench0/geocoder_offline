@@ -19,6 +19,7 @@ void main() {
         'STATE_ALPHA',
         'PRIMARY_LATITUDE',
         'PRIMARY_LONGITUDE',
+        'TIMEZONE',
         fieldDelimiter: ',',
         eol: '\n',
         numMarkers: 1);
@@ -39,15 +40,18 @@ void main() {
         'country code',
         'latitude',
         'longitude',
+        'timezone',
         fieldDelimiter: '\t',
         eol: '\n',
         numMarkers: 1);
 
     var result = geocoder.search(41.881832, -87.623177);
+
     expect(result.length, 1);
     expect(result.first.distance.toInt(), 0);
     expect(result.first.bearing, 'E');
     expect(result.first.location.featureName, 'Chicago Loop');
+    expect(result.first.location.timezone, 'America/Chicago');
     expect(result.first.gnisFormat.trim(), 'Chicago Loop, US');
   });
 }

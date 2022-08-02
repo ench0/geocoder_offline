@@ -10,6 +10,7 @@ void main(List<String> args) {
       'country code',
       'latitude',
       'longitude',
+      'timezone',
       fieldDelimiter: '\t',
       eol: '\n');
 
@@ -23,6 +24,7 @@ void main(List<String> args) {
       'STATE_ALPHA',
       'PRIMARY_LATITUDE',
       'PRIMARY_LONGITUDE',
+      'TIMEZONE',
       fieldDelimiter: ',',
       eol: '\n');
 

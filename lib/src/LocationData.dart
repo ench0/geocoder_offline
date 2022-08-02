@@ -11,20 +11,27 @@ class LocationData {
   /// Longitude position of Location
   double? longitude;
 
-  LocationData(this.featureName, this.state, this.latitude, this.longitude);
+  /// Timezone of Location
+  String? timezone;
+
+  LocationData(this.featureName, this.state, this.latitude, this.longitude,
+      this.timezone);
 
   static LocationData fromJson(Map<String, dynamic> json) {
     return LocationData(
-        json['featureName'],
-        json['state'],
-        double.parse(json['latitude'].toString()),
-        double.parse(json['longitude'].toString()));
+      json['featureName'],
+      json['state'],
+      double.parse(json['latitude'].toString()),
+      double.parse(json['longitude'].toString()),
+      json['timezone'],
+    );
   }
 
   Map<String, dynamic> toJson() => {
         'featureName': featureName,
         'state': state,
         'latitude': latitude,
-        'longitude': longitude
+        'longitude': longitude,
+        'timezone': timezone
       };
 }

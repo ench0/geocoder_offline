@@ -56,6 +56,9 @@ class GeocodeData {
   /// Name of column that contains Location longitude
   final String longitudeHeader;
 
+  /// Name of column that contains Location longitude
+  final String timezoneHeader;
+
   /// Number of nearest result
   final int numMarkers;
 
@@ -64,9 +67,10 @@ class GeocodeData {
   late int _stateHeaderSN;
   late int _latitudeHeaderSN;
   late int _longitudeHeaderSN;
+  late int _timezoneHeaderSN;
 
   GeocodeData(this.inputString, this.featureNameHeader, this.stateHeader,
-      this.latitudeHeader, this.longitudeHeader,
+      this.latitudeHeader, this.longitudeHeader, this.timezoneHeader,
       {this.numMarkers = 1,
       this.fieldDelimiter = defaultFieldDelimiter,
       this.textDelimiter = defaultTextDelimiter,
@@ -84,11 +88,14 @@ class GeocodeData {
         rowsAsListOfValues[0].indexWhere((x) => x == latitudeHeader);
     _longitudeHeaderSN =
         rowsAsListOfValues[0].indexWhere((x) => x == longitudeHeader);
+    _timezoneHeaderSN =
+        rowsAsListOfValues[0].indexWhere((x) => x == timezoneHeader);
 
     if (_featureNameHeaderSN == -1 ||
         _stateHeaderSN == -1 ||
         _latitudeHeaderSN == -1 ||
-        _longitudeHeaderSN == -1) {
+        _longitudeHeaderSN == -1 ||
+        _timezoneHeaderSN == -1) {
       throw Exception('Some of header is not find in file');
     }
 
@@ -98,7 +105,8 @@ class GeocodeData {
             model[_featureNameHeaderSN],
             model[_stateHeaderSN],
             double.tryParse(model[_latitudeHeaderSN].toString()) ?? -1,
-            double.tryParse(model[_longitudeHeaderSN].toString()) ?? -1))
+            double.tryParse(model[_longitudeHeaderSN].toString()) ?? -1,
+            model[_timezoneHeaderSN]))
         .map((model) => model.toJson())
         .toList();
 
